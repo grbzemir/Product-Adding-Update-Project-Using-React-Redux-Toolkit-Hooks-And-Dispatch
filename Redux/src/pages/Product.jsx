@@ -49,6 +49,13 @@ const Product = () => {
 
     return (
         <div>
+            <div>
+                {
+                    data?.map((dt, i) => (
+                        <ProductCard key={i} dt={dt} />
+                    ))
+                }
+            </div>
             <ProductCard />
             {modal && <Modal title={"Ürün Oluştur"} content={contentModal} modalFunc={() => dispatch(modalFunc())} />}
         </div>
