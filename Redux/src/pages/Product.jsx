@@ -13,6 +13,7 @@ import { modalFunc } from '../redux/modalSlice'
 
 const Product = () => {
     const { modal } = useSelector(state => state.modal);
+    const { data } = useSelector(state => state.data);
     const dispatch = useDispatch();
     const [productInfo, setProductInfo] = useState({ name: "", price: "", url: "" });
 
@@ -26,6 +27,8 @@ const Product = () => {
 
         }
     }
+
+    console.log(data, "data");
 
     console.log(productInfo, "productInfo");
     console.log(modal, "modal");
