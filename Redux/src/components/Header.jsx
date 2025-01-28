@@ -2,6 +2,8 @@ import React, { useDebugValue } from 'react';
 import { MdPostAdd } from 'react-icons/md'
 import { useDispatch } from 'react-redux';
 import { modalFunc } from '../redux/modalSlice';
+import { sortingDataFunc } from '../redux/dataSlice';
+import { searchDataFunc } from '../redux/dataSlice';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -10,13 +12,13 @@ const Header = () => {
             <div className="text-3xl">REACT UYGULAMA</div>
             <div className="flex items-center gap-5">
                 <div className="text-black">
-                    <select className="h-10 rounded-lg" name="" id="">
+                    <select onChange={e => dispatch(sortingDataFunc(e.target.value))} className="h-10 rounded-lg" name="" id="">
                         <option value="asc">ARTAN</option>
                         <option value="desc">AZALAN</option>
                     </select>
                 </div>
                 <div>
-                    <input className="h-10 rounded-lg px-4" type="text" placeholder="Arama Yapınız.." />
+                    <input onChange={e => dispatch(searchDataFunc(e.target.value))} className="h-10 rounded-lg px-4" type="text" placeholder="Arama Yapınız.." />
                 </div>
                 <div onClick={() => dispatch(modalFunc())} className="bg-indigo-800 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer">
                     <MdPostAdd size={24} />

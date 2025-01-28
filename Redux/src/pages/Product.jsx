@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
 import { useSelector } from 'react-redux'
 import Modal from '../components/Modal'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import { useState } from 'react'
-import { createDataFunc } from '../redux/dataSlice';
+import { createDataFunc, updateDataFunc } from '../redux/dataSlice';
 import { useDispatch } from 'react-redux'
 import { modalFunc } from '../redux/modalSlice'
+import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -15,7 +17,10 @@ const Product = () => {
     const { modal } = useSelector(state => state.modal);
     const { data } = useSelector(state => state.data);
     const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
     const [productInfo, setProductInfo] = useState({ name: "", price: "", url: "" });
+
 
     const onChangeFunc = (e, type) => {
         if (type === "url") {
@@ -27,6 +32,19 @@ const Product = () => {
         }
     };
 
+    let loc = location?.search.split('=')[1];
+
+    useEffect(() => {
+        if (loc) {
+            const product = data?.find(dt => dt.id == loc);
+            if (product) {
+                setProductInfo(product);
+            }
+        }
+    }, [loc, data]);
+
+
+    console.log(location?.search.split('=')[1], "data");
     console.log(data, "data");
     console.log(productInfo, "productInfo");
     console.log(modal, "modal");
@@ -36,26 +54,57 @@ const Product = () => {
         dispatch(modalFunc());
     };
 
+    const buttonUpdateFunc = () => {
+        dispatch(updateDataFunc({ ...productInfo, id: loc }));
+        dispatch(modalFunc());
+        navigate("/");
+    }
+
     const contentModal = (
         <div>
-            <Input type={"text"} placeholder={"Ürün Ekle"} name={"name"} id={"name"} onChange={e => onChangeFunc(e, "name")} />
-            <Input type={"text"} placeholder={"Fiyat Ekle"} name={"price"} id={"price"} onChange={e => onChangeFunc(e, "price")} />
-            <Input type={"file"} placeholder={"Resim Seç"} name={"url"} id={"url"} onChange={e => onChangeFunc(e, "url")} />
-            <Button onClick={buttonFunc} btnText={"Ürün Oluştur"} />
+            <Input
+                value={productInfo.name || ""}
+                type={"text"}
+                placeholder={"Ürün Ekle"}
+                name={"name"}
+                id={"name"}
+                onChange={e => onChangeFunc(e, "name")}
+            />
+            <Input
+                value={productInfo.price?.toString() || ""}
+                type={"text"}
+                placeholder={"Fiyat Ekle"}
+                name={"price"}
+                id={"price"}
+                onChange={e => onChangeFunc(e, "price")}
+            />
+            <Input
+                type={"file"}
+                placeholder={"Resim Seç"}
+                name={"url"}
+                id={"url"}
+                onChange={e => onChangeFunc(e, "url")}
+            />
+            <Button
+                onClick={loc ? buttonUpdateFunc : buttonFunc}
+                btnText={loc ? "Ürün Güncelle" : "Ürün Oluştur"}
+            />
         </div>
-    )
+    );
+
 
     return (
         <div>
             <div className="flex items-center flex-wrap">
                 {
                     data?.map((dt, i) => (
-                        <ProductCard key={i} dt={dt} />
+                        <ProductCard key={dt.id} dt={dt} />
                     ))
                 }
+
             </div>
 
-            {modal && <Modal title={"Ürün Oluştur"} content={contentModal} modalFunc={() => dispatch(modalFunc())} />}
+            {modal && <Modal title={loc ? "Ürün Güncelle" : "Ürün Oluştur"} content={contentModal} modalFunc={() => dispatch(modalFunc())} />}
         </div>
     )
 }
