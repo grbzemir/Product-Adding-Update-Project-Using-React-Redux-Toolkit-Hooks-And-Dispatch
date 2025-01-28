@@ -4,6 +4,7 @@ import { BsThreeDots } from 'react-icons/bs';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteDataFunc } from '../redux/dataSlice';
+import { updateDataFunc } from '../redux/dataSlice';
 
 const ProductCard = ({ dt }) => {
 
@@ -26,7 +27,7 @@ const ProductCard = ({ dt }) => {
                 (
                     <div className="bg-black border border-white text-white absolute top-5 right-2 p-2 text-sm">
                         <div onClick={() => dispatch(deleteDataFunc(dt?.id))} className="cursor-pointer">Sil</div>
-                        <div onClick={() => dispatch()} className="cursor-pointer">Güncelle</div>
+                        <div onClick={() => dispatch(updateDataFunc(dt))} className="cursor-pointer">Güncelle</div>
                     </div>
                 )
 
@@ -39,7 +40,7 @@ ProductCard.propTypes = {
         url: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        id: PropTypes.string.isRequired
+        id: PropTypes.number.isRequired
     }).isRequired
 };
 

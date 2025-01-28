@@ -18,23 +18,21 @@ const Product = () => {
     const [productInfo, setProductInfo] = useState({ name: "", price: "", url: "" });
 
     const onChangeFunc = (e, type) => {
-        if (type == "url") {
-            setProductInfo(prev => ({ ...prev, [e.target.name]: URL.createObjectURL(e.target.files[0]) }))
+        if (type === "url") {
+            setProductInfo(prev => ({ ...prev, [e.target.name]: URL.createObjectURL(e.target.files[0]) }));
+        } else if (type === "price") {
+            setProductInfo(prev => ({ ...prev, [e.target.name]: Number(e.target.value) }));
+        } else {
+            setProductInfo(prev => ({ ...prev, [e.target.name]: e.target.value }));
         }
-        else {
-
-            setProductInfo(prev => ({ ...prev, [e.target.name]: e.target.value }))
-
-        }
-    }
+    };
 
     console.log(data, "data");
-
     console.log(productInfo, "productInfo");
     console.log(modal, "modal");
 
     const buttonFunc = () => {
-        dispatch(createDataFunc(productInfo))
+        dispatch(createDataFunc({ ...productInfo, id: data.length + 1 }));
         dispatch(modalFunc());
     };
 
