@@ -56,7 +56,7 @@ const Product = () => {
                     ))
                 }
             </div>
-            <ProductCard />
+
             {modal && <Modal title={"Ürün Oluştur"} content={contentModal} modalFunc={() => dispatch(modalFunc())} />}
         </div>
     )
