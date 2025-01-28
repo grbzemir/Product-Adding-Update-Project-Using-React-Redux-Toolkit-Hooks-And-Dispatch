@@ -15,7 +15,7 @@ export const dataSlice = createSlice({
             state.data = [...state.data.filter(dt => dt.id != action.payload)];
         },
         updateDataFunc: (state, action) => {
-            state.data = [...state.data.map(dt => dt.id === action.payload.id ? action.payload : dt)];
+            state.data = [...state.data.map(dt => dt.id === action.payload.id ? ({ ...dt, ...action.payload }) : dt)];
         },
     },
 });
