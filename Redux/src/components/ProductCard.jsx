@@ -6,16 +6,19 @@ import { useDispatch } from 'react-redux';
 import { deleteDataFunc } from '../redux/dataSlice';
 import { updateDataFunc } from '../redux/dataSlice';
 import { modalFunc } from '../redux/modalSlice';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ dt }) => {
 
     const [openEdit, setOpenEdit] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const updateFunc = () => {
-        dispatch(modalFunc)
-        dispatch(updateDataFunc(dt));
-        setOpenEdit(!openEdit);
+        dispatch(modalFunc());
+        // dispatch(updateDataFunc(dt))
+        setOpenEdit(false);
+        navigate(`/?update=${dt?.id}`);
     }
 
     return (
