@@ -49,7 +49,7 @@ const Product = () => {
 
     return (
         <div>
-            <div>
+            <div className="flex items-center flex-wrap">
                 {
                     data?.map((dt, i) => (
                         <ProductCard key={i} dt={dt} />
