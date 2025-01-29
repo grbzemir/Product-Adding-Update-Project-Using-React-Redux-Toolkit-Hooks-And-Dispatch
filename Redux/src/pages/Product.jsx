@@ -36,12 +36,9 @@ const Product = () => {
 
     useEffect(() => {
         if (loc) {
-            const product = data?.find(dt => dt.id == loc);
-            if (product) {
-                setProductInfo(product);
-            }
+            setProductInfo(data.find(dt => dt.id == loc));
         }
-    }, [loc, data]);
+    }, [loc]);
 
 
     console.log(location?.search.split('=')[1], "data");
@@ -63,7 +60,7 @@ const Product = () => {
     const contentModal = (
         <div>
             <Input
-                value={productInfo.name || ""}
+                value={productInfo.name}
                 type={"text"}
                 placeholder={"Ürün Ekle"}
                 name={"name"}
@@ -71,7 +68,7 @@ const Product = () => {
                 onChange={e => onChangeFunc(e, "name")}
             />
             <Input
-                value={productInfo.price?.toString() || ""}
+                value={productInfo.price}
                 type={"text"}
                 placeholder={"Fiyat Ekle"}
                 name={"price"}
@@ -92,12 +89,14 @@ const Product = () => {
         </div>
     );
 
+    const filteredItems = data?.filter(dt => dt.name.toLowerCase().includes(data?.keyword?.toLowerCase() || ""));
+
 
     return (
         <div>
             <div className="flex items-center flex-wrap">
                 {
-                    data?.map((dt, i) => (
+                    filteredItems?.map((dt, i) => (
                         <ProductCard key={dt.id} dt={dt} />
                     ))
                 }
