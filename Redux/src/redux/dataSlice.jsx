@@ -5,6 +5,7 @@ const initialState = {
     keyword: ""
 };
 
+//Ekleme silme Güncelleme listeleme arama işlemleri
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
