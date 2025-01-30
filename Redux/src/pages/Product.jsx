@@ -68,7 +68,7 @@ const Product = () => {
                 onChange={e => onChangeFunc(e, "name")}
             />
             <Input
-                value={productInfo.price}
+                value={productInfo.price?.toString() || ""}
                 type={"text"}
                 placeholder={"Fiyat Ekle"}
                 name={"price"}
