@@ -4,6 +4,8 @@ const initialState = {
     modal: false,
 };
 
+//Başlangıç durumunu false olarak ayarladık ürün eklemeye çalıştığımda false true olucak
+
 export const modalSlice = createSlice({
     name: 'modal',
     initialState,
