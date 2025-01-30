@@ -16,6 +16,7 @@ const ProductCard = ({ dt }) => {
 
     const updateFunc = () => {
         dispatch(modalFunc());
+        //Storedan geri döndüm dispatch , getState , subscribe
         // dispatch(updateDataFunc(dt))
         setOpenEdit(false);
         navigate(`/?update=${dt?.id}`);
