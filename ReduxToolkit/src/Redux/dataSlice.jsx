@@ -8,11 +8,14 @@ const initialState = {
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
-    reducers: {},
+    reducers: {
+        createDataFunction: (state, action) => {
+            state.data = [...state.data, action.payload];
+        },
+    },
+});
 
-},
-)
 
 
-export const { } = dataSlice.actions;
+export const { createDataFunction } = dataSlice.actions;
 export default dataSlice.reducer;
