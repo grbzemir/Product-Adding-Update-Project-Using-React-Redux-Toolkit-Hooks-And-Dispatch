@@ -2,11 +2,18 @@ import React from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { deleteDataFunction, updateDataFunction } from '../Redux/dataSlice';
+import { modalFunction } from '../Redux/modalSlice';
 
 const ProductCard = ({ dt }) => {
 
     const [openEdit, setOpenEdit] = useState(false);
     const dispatch = useDispatch();
+
+    const updateFunc = () => {
+        dispatch(modalFunction())
+        dispatch(updateDataFunction(dt))
+    }
 
     return (
         <div className="w-[200px] h-[200px] relative m-2 rounded-md">
@@ -21,11 +28,11 @@ const ProductCard = ({ dt }) => {
             {
                 openEdit && (
                     <div className="bg-black border border-white text-white absolute top-0 right-2">
-                        <div onClick={() => className='cursor-pointer'>Sil</div>
-                        <div className='cursor-pointer'>Güncelle</div>
+                        <div onClick={() => dispatch(deleteDataFunction(dt?.id))} className='cursor-pointer'>Sil</div>
+                        <div onClick={updateFunc} className='cursor-pointer'>Güncelle</div>
                     </div>
-    )
-}
+                )
+            }
         </div >
     )
 }

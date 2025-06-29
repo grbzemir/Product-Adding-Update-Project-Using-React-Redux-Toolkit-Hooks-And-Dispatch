@@ -6,10 +6,11 @@ import Button from '../Components/Button'
 import Input from '../Components/Input'
 import { createDataFunction } from '../Redux/dataSlice'
 import { modalFunction } from '../Redux/modalSlice'
+import { deleteDataFunction } from '../Redux/dataSlice'
 
 
 
-const Product = () => {
+const Product = ({ id }) => {
 
 
     const { modal } = useSelector((state) => state.modal)
@@ -40,7 +41,7 @@ const Product = () => {
 
 
     const buttonFunc = () => {
-        dispatch(createDataFunction(productInfo))
+        dispatch(createDataFunction({ ...productInfo, id: data.length + 1 }))
         dispatch(modalFunction())
     }
 
