@@ -1,7 +1,13 @@
 import React from 'react'
 import { BsThreeDots } from 'react-icons/bs'
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const ProductCard = ({ dt }) => {
+
+    const [openEdit, setOpenEdit] = useState(false);
+    const dispatch = useDispatch();
+
     return (
         <div className="w-[200px] h-[200px] relative m-2 rounded-md">
             <img src={dt?.url} className="w-full h-full object-cover rounded-md" alt="" />
@@ -9,10 +15,18 @@ const ProductCard = ({ dt }) => {
                 <div className="text-lg font-semibold">{dt?.name}</div>
                 <div>{dt?.price}</div>
             </div>
-            <div className="absolute top-0 right-0">
+            <div onClick={() => setOpenEdit(!openEdit)} className="absolute top-0 right-0">
                 <BsThreeDots color="white" size={24} />
             </div>
-        </div>
+            {
+                openEdit && (
+                    <div className="bg-black border border-white text-white absolute top-0 right-2">
+                        <div onClick={() => className='cursor-pointer'>Sil</div>
+                        <div className='cursor-pointer'>Güncelle</div>
+                    </div>
+    )
+}
+        </div >
     )
 }
 
