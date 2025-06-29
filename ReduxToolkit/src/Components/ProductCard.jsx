@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { deleteDataFunction, updateDataFunction } from '../Redux/dataSlice';
 import { modalFunction } from '../Redux/modalSlice';
 import { useNavigate } from 'react-router-dom';
-import { sortingDataFunction } from '../Redux/dataSlice'
+
 
 const ProductCard = ({ dt }) => {
 

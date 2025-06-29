@@ -3,18 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import ProductCard from '../Components/ProductCard'
 import Modal from '../Components/Modal'
 import Button from '../Components/Button'
-import Input from '../Components/Input'
 import { createDataFunction, updateDataFunction } from '../Redux/dataSlice'
 import { modalFunction } from '../Redux/modalSlice'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import Input from '../Components/input'
 
-
-
-
-
-
-const Product = ({ id }) => {
+const Product = ({ }) => {
 
 
     const { modal } = useSelector((state) => state.modal)
